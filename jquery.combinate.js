@@ -108,25 +108,32 @@
 
         /**
          * determine how many characters to insert (l), prioritized as follows:
-         * 1) the specified pieceLength
-         * 2) the resultant field's maxlength ( if specified )
+         * 1) the specified pieceLength ( assuming it's valid )
+         * 2) the piece's (field's) maxlength ( if specified )
          * 3) default pieceLength ( = 1 )
          */
 
         var l = 1,
-            p = $(part);
+            p = $(part),
+            pMax = $(part).attr('maxlength');
 
-        if ( settings.pieceLength != 1 ) {
-         l = settings.pieceLength;
+        // try to use user-defined pieceLength
+        if ( settings.pieceLength != 0 ) {
+          l = settings.pieceLength;
         }
-        else {
-          // field has a maxlength
-          if ( typeof p.attr('maxlength') != 'undefined' ) {
-            l = parseInt( p.attr('maxlength') );
+
+        // get pMax (piece/field's maxlength)
+        // verify that pieceLength is valid
+        if ( typeof pMax != 'undefined' ) {
+          pMax = Math.abs( parseInt( pMax ) );
+          if ( settings.pieceLength > pMax || settings.pieceLength == 0 ) {
+            l = pMax;
           }
         }
 
-        var piece = combined.substring( i * l, (i + 1) * l );
+        // get the piece, revise the combined string
+        var piece = combined.slice(0, l);
+        combined = combined.slice(l);
         if ( settings.debug ) console.log('[' + i + '] l = ' + l + ' : ' + piece);
 
         // assign substring to input field
