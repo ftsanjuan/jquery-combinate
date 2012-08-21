@@ -75,13 +75,13 @@
        *  Settings
        *
        * 'resultClass'        : (css class) designates the fields to insert the resultant decombined string into (default: 'combinate')
-       * 'pieceLength'        : (integer) the number of characters to insert per result field (i.e. each 'piece') (default:  1)
+       * 'pieceLength'        : (integer) the number of characters to insert per result field (i.e. each 'piece') (default:  0)
        * 'exclude'            : (css selector) designates elements to exclude from decombination
        * 'debug'              : (boolean) if true, displays console log messages (default: false)
        */
       var settings = $.extend({
             'resultClass' : 'combinate',
-            'pieceLength' : 1,
+            'pieceLength' : 0,
             'exclude' : '',
             'debug' : false
           }, options || {});
