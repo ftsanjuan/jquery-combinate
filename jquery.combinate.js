@@ -61,7 +61,7 @@
         element.append('<input type="hidden" name="' + element.attr('id') + '-combined' + '" value="' + combined + '"/>');
       }
     });
-  }
+  };
 
   /*
    * Decombines the string contained within the specified element and inserts its
@@ -140,6 +140,6 @@
         p.val( piece );
       });
     });
-  }
+  };
 
 })(jQuery);
