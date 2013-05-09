@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>jQuery Combinate Demo</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style type="text/css">
+      h2 {
+        margin-top: 40px;
+      }
+
+      .container {
+        margin-top: 80px;
+      }
+
+      .demo {
+        margin-bottom: 20px;
+      }
+
+      .exclude-me,
+      .exclude-me-too {
+        border: 1px solid #f00 !important;
+      }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="jquery.combinate.min.js"></script>
+    <script type='text/javascript'>
+      $(document).ready(function() {
+        // simple demo
+        $('.btn-simple-demo').click(function(event){
+          $('.form-simple').combinate({
+            resultElement: '#combinated'
+          });
+          event.preventDefault();
+        });
+
+        // advanced demo
+        $('.btn-advanced-demo').click(function(event){
+          $('.form-advanced').combinate({
+            resultElement: '#combinated-advanced',
+            separator: '-',
+            exclude: '.exclude-me'
+          });
+          event.preventDefault();
+        });
+
+        // simple decombinate demo
+        $('.btn-decombinate-demo').click(function(event){
+          $('#field-decombinate').decombinate();
+          event.preventDefault();
+        });
+
+        // decombinate advanced demo
+        $('.btn-decombinate-advanced-demo').click(function(event){
+          $('#field-decombinate-advanced').decombinate({
+            resultClass: 'decombinate-advanced',
+            pieceLength: 5,
+            exclude: '.exclude-me-too'
+          });
+          event.preventDefault();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>jQuery Combinate</h1>
+        </div>
+      </div>
+
+      <hr>
+
+    <h2>$(selector).combinate(options)</h2>
+
+    <hr>
+
+      <div class="row demo">
+        <div class="span6">
+          <h3>Simple Settings</h3>
+          <p>Clicking <strong>Combinate!</strong> will combine values in the fields with <code>class='combinate'</code> and will insert them combined string into the element with a css selector of <code>'#combinated'</code></p>
+          <p><strong>Code:</strong></p>
+<pre>
+  $('.form-simple').combinate({
+    resultElement: '#combinated'
+  });
+</pre>
+        </div>
+        <div class="span6">
+          <form class="form form-horizontal form-simple well">
+            <legend><strong>Simple Form</strong></legend>
+            <div class="control-group">
+              <label class="control-label">Combine these fields:</label>
+              <div class="controls">
+                <input type="text" class="combinate input-mini" value="COMB">
+                <input type="text" class="combinate input-mini" value="INAT">
+                <input type="text" class="combinate input-mini" value="EME1">
+                <input type="text" class="combinate input-mini" value="2345">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Combinated result:</label>
+              <div class="controls">
+                <input id="combinated" type="text" class="input">
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="btn btn-success btn-simple-demo" href="#">Combinate!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row demo">
+        <div class="span6">
+          <h3>Additional Settings</h3>
+          <p>Clicking <strong>Combinate!</strong> will combine values in the fields with <code>class='combinate'</code> <em>except</em> for the third field which has a class of <code>'exclude-me'</code></p>
+          <p>Also, a separator will be added to separate each piece and the final result string will be inserted into <code>#combinated-advanced</code></p>
+          <p><strong>Code:</strong></p>
+<pre>
+  $('.form-advanced').combinate({
+    resultElement: '#combinated-advanced',
+    separator: '-',
+    exclude: '.exclude-me'
+  });
+</pre>
+        </div>
+        <div class="span6">
+          <form class="form form-horizontal form-advanced well">
+            <legend><strong>Advanced Form</strong></legend>
+            <div class="control-group">
+              <label class="control-label">Combine these fields:</label>
+              <div class="controls">
+                <input type="text" class="combinate input-mini" value="1234">
+                <input type="text" class="combinate input-mini" value="5678">
+                <input type="text" class="combinate exclude-me input-mini warning" value="WXYZ">
+                <input type="text" class="combinate input-mini" value="9ABC">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Combinated result:</label>
+              <div class="controls">
+                <input id="combinated-advanced" type="text" class="input">
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="btn btn-success btn-advanced-demo" href="#">Combinate!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <h2>$(selector).decombinate(options)</h2>
+
+    <hr>
+
+      <div class="row demo">
+        <div class="span6">
+          <h3>Simple Settings</h3>
+          <p>Clicking <strong>Decombinate!</strong> will 'de-combine' (read: separate) the value in the targeted field into pieces (1 character each) and insert them into separate input fields with <code>class='decombinate'</code>.</p>
+          <p><em>Note:</em> Because <code>decombinate</code> defaults to 1 character per field, any remaining unused characters are discarded.</p>
+          <p><strong>Code:</strong></p>
+<pre>
+  $('#field-decombinate').decombinate();
+</pre>
+        </div>
+        <div class="span6">
+          <form class="form form-horizontal form-decombinate well">
+            <legend><strong>Simple Decombinate Form</strong></legend>
+            <div class="control-group">
+              <label class="control-label">Field to Decombinate:</label>
+              <div class="controls">
+                <input id="field-decombinate" type="text" class="input" value="DECOMBINATEME">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Decombinated result:</label>
+              <div class="controls">
+                <input type="text" class="decombinate input-mini">
+                <input type="text" class="decombinate input-mini">
+                <input type="text" class="decombinate input-mini">
+                <input type="text" class="decombinate input-mini">
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="btn btn-danger btn-decombinate-demo" href="#">Decombinate!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    <hr>
+
+      <div class="row demo">
+        <div class="span6">
+          <h3>Advanced Settings</h3>
+          <p>Clicking <strong>Decombinate!</strong> will 'de-combine' (read: separate) the value in the targeted field into pieces (3 characters each) and insert them into separate input fields with <code>class='decombinate-advanced'</code> excluding the field with <code>class='exclude-me-too'</code></p>
+          <p>Note: Decombinate will use either the specified <code>pieceLength</code>, the field's <code>maxlength</code> attribute or the default piecelength (1) to determine how many characters are to be inserted per field.  Character blocks are inserted into each field until all characters have been used.</p>
+          <p><strong>Code:</strong></p>
+<pre>
+  $('#field-decombinate-advanced').decombinate({
+    resultClass: 'decombinate-advanced',
+    pieceLength: 5,
+    exclude: '.exclude-me-too'
+  });
+</pre>
+        </div>
+        <div class="span6">
+          <form class="form form-horizontal form-decombinate-advanced well">
+            <legend><strong>Advanced Decombinate Form</strong></legend>
+            <div class="control-group">
+              <label class="control-label">Field to Decombinate:</label>
+              <div class="controls">
+                <input id="field-decombinate-advanced" type="text" class="input" value="DECOMBINATEME">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Decombinated result:</label>
+              <div class="controls">
+                <input type="text" class="decombinate-advanced input-mini">
+                <input type="text" class="decombinate-advanced input-mini exclude-me-too">
+                <input type="text" class="decombinate-advanced input-mini">
+                <input type="text" class="decombinate-advanced input-mini">
+              </div>
+            </div>
+            <div class="form-actions">
+              <a class="btn btn-danger btn-decombinate-advanced-demo" href="#">Decombinate!</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
