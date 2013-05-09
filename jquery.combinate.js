@@ -39,6 +39,9 @@
           parts = [],
           defaultResultIdentifier = settings.combineClass+"-combinated";
 
+      // a general purpose logging function
+      // checks if debug setting is enabled and whether
+      // console.log is defined by the browser before attempting to write to it.
       var log = function(msg) {
         if ( settings.debug && typeof(console.log) != 'undefined' ) {
           console.log(msg);
@@ -120,6 +123,9 @@
           fields = $('.' + settings.resultClass),
           parts = [];
 
+      // a general purpose logging function
+      // checks if debug setting is enabled and whether
+      // console.log is defined by the browser before attempting to write to it.
       var log = function(msg) {
         if ( settings.debug && typeof(console.log) != 'undefined' ) {
           console.log(msg);
